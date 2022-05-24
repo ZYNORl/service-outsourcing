@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.serve.Dao.CompanyDao">
+    <select id="loginByTelCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select id from company where tel = #{tel}
+    </select>
+    <select id="getCompanyById" resultType="com.example.serve.bean.company.Company" parameterType="java.lang.Integer">
+        select * from company where id = #{comid}
+    </select>
+    <update id="setIntroduce">
+        update company
+        set introduce = #{introduce},personnum= #{personnum}
+        where id = #{comid}
+    </update>
+    <!-- useGeneratedKeys 设置为true之后，mybatis会使用JDBC的getGeneratedKeys 方法取出来由数据库内部生成的主键。
+获得到主键后将其赋值给keyProperty配置的id属性。当需要设置多个属性时，使用逗号隔开，这种情况下通常还需要设置
+keyColumn属性，按顺序指定数据库的列，这里列的值会和keyProperty配置的属性一一对应。由于要使用数据库返回的主键值，
+所以SQL上下两部分的列中去掉了id列和对应的#{id}列 -->
+    <insert id="addSubmitJob" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.example.serve.bean.company.SubmitJob">
+        insert into submitJob (comid,position,extraAsk,edu,yearLimit,address,welfare,submitdate,salary)
+        values (#{comid},#{position},#{extraAsk},#{edu},#{yearLimit},#{address},#{welfare},#{submitdate},#{salary})
+    </insert>
+    <select id="getSubmitJob" resultType="com.example.serve.bean.company.SubmitJob" parameterType="java.lang.Integer">
+        select * from submitJob where id = #{JobId}
+    </select>
+    <select id="getUsersByComId" resultType="com.example.serve.bean.user.User" parameterType="java.lang.Integer">
+        select * from user where comid = #{comid}
+    </select>
+    <select id="getUseridByUserInfo" resultType="java.lang.Integer" parameterType="com.example.serve.bean.user.User">
+        select id from user where tel = #{tel} and password = #{password} and name = #{name} and identNumber = #{identNumber}
+    </select>
+    <insert id="addToudi">
+        insert into toudi(jobid,userid,time,scores,position,comid)
+        values (#{jobid},#{userid},#{time},#{scores},#{position},#{comid})
+    </insert>
+    <select id="getToudiListByComId" parameterType="java.lang.Integer" resultType="com.example.serve.bean.company.Toudi">
+        select * from toudi where comid = #{comid}
+    </select>
+    <select id="loginById" resultType="java.lang.Integer" parameterType="com.example.serve.bean.company.Company">
+        select id from company where tel = #{tel} and password = #{password}
+    </select>
+    <select id="getAttendanceByUserIdAndComId" resultType="com.example.serve.bean.company.Attendance" parameterType="java.lang.Integer">
+        select * from attendance where userid = #{userid} and comid = #{comid}
+    </select>
+    <select id="getAttendanceListByComId" resultType="com.example.serve.bean.company.Attendance" parameterType="java.lang.Integer">
+        select * from attendance where comid = #{comid}
+    </select>
+    <select id="getAttendanceListByDate" resultType="com.example.serve.bean.company.Attendance">
+        select * from attendance where dotime <![CDATA[>=]]> #{firstDate} and dotime <![CDATA[<=]]> #{lastDate} and comid = #{comid}
+    </select>
+    <insert id="editAttendance" parameterType="com.example.serve.bean.company.Attendance">
+        insert into attendance(userid,comid,leavenum,latenum,cardnum,overworknum,dotime)
+         values(#{userid},#{comid},#{leavenum},#{latenum},#{cardnum},#{overworknum},#{dotime})
+    </insert>
+
+    <select id="getEmployRecordAll" resultType="com.example.serve.bean.company.EmployRecord" parameterType="java.lang.Integer">
+        select * from employrecord where userid = #{userid}
+    </select>
+    <select id="getEmployRecordNoComId" resultType="com.example.serve.bean.company.EmployRecord" parameterType="java.lang.Integer">
+        select * from employrecord where userid = #{userid} and comid != #{comid}
+    </select>
+    <select id="getCommentByUserId" resultType="com.example.serve.bean.company.Comment" parameterType="java.lang.Integer">
+        select * from comment where userid = #{userid}
+    </select>
+    <select id="getCommentByUserIdNoComId" resultType="com.example.serve.bean.company.Comment" parameterType="java.lang.Integer">
+        select * from comment where userid = #{userid} and comid != #{comid}
+    </select>
+    <select id="getCommentByUserIdAndComId" resultType="com.example.serve.bean.company.Comment" parameterType="java.lang.Integer">
+        select * from comment where userid = #{userid} and  comid = #{comid}
+    </select>
+    <select id="getEventByUserId" resultType="com.example.serve.bean.company.Event" parameterType="java.lang.Integer">
+        select * from event where userid = #{userid}
+    </select>
+    <select id="getEventByUserIdNoComId" resultType="com.example.serve.bean.company.Event" parameterType="java.lang.Integer">
+        select * from event where userid = #{userid} and comid != #{comid}
+    </select>
+    <select id="getEventByUserIdAndComId" resultType="com.example.serve.bean.company.Event" parameterType="java.lang.Integer">
+        select * from event where userid = #{userid} and  comid = #{comid}
+    </select>
+    <select id="getPerformanceByUserId" resultType="com.example.serve.bean.company.Performance" parameterType="java.lang.Integer">
+        select * from performance where userid = #{userid}
+    </select>
+    <select id="getPerformanceByUserIdNoComId" resultType="com.example.serve.bean.company.Performance" parameterType="java.lang.Integer">
+        select * from performance where userid = #{userid} and comid != #{comid}
+    </select>
+    <select id="getPerformanceByUserIdAndComId" resultType="com.example.serve.bean.company.Performance" parameterType="java.lang.Integer">
+        select * from performance where userid = #{userid} and  comid = #{comid}
+    </select>
+    <select id="getSumAttendanceByUserId" resultType="com.example.serve.bean.company.Attendance" parameterType="java.lang.Integer">
+        select * from performance where userid = #{userid}
+    </select>
+    <select id="getSumAttendanceByUserIdNoComId" resultType="com.example.serve.bean.company.Attendance" parameterType="java.lang.Integer">
+        select * from performance where userid = #{userid} and comid != #{comid}
+    </select>
+    <select id="getSumAttendanceByUserIdAndComId" resultType="com.example.serve.bean.company.Attendance" parameterType="java.lang.Integer">
+        select * from performance where userid = #{userid} and  comid = #{comid}
+    </select>
+
+    <update id="updatePerformance" parameterType="com.example.serve.bean.company.Performance">
+        update performance
+        set text = #{text}
+        where userid = #{userid} and comid = #{comid}
+    </update>
+    <update id="updateComment" parameterType="com.example.serve.bean.company.Comment">
+        update comment
+        set text = #{text}
+        where userid = #{userid} and comid = #{comid}
+    </update>
+    <update id="updateEvent" parameterType="com.example.serve.bean.company.Event">
+        update event
+        set text = #{text}
+        where userid = #{userid} and comid = #{comid}
+    </update>
+    <select id="getPerformance" resultType="java.lang.String" parameterType="java.lang.Integer">
+        select text from performance where userid = #{userid} and comid = #{comid}
+    </select>
+    <select id="getComment" resultType="java.lang.String" parameterType="java.lang.Integer">
+        select text from comment where userid = #{userid} and comid = #{comid}
+    </select>
+    <select id="getEvent" resultType="java.lang.String" parameterType="java.lang.Integer">
+        select text from event where userid = #{userid} and comid = #{comid}
+    </select>
+</mapper>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.serve.Dao.HonorDao">
+    <insert id="insertHonor" parameterType="com.example.serve.bean.honor">
+        insert into honor(userid,text,url) values(#{userid},#{text},#{url})
+    </insert>
+    <select id="getHonorById" parameterType="java.lang.Integer" resultType="com.example.serve.bean.honor">
+        select * from honor where userid = #{userid}
+    </select>
+
+</mapper>

@@ -1,0 +1,30 @@
+server:
+  port: 83
+
+spring:
+  thymeleaf:
+    mode: LEGACYHTML5
+    encoding: utf-8
+    content-type: text/html
+    cache: false
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.98.33.35:1999/vue_hrrrr?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+
+  redis:
+    host: 47.98.33.35
+    database: 0
+    port: 6379
+
+  #  resources:
+  #    static-locations: classpath:/templates  #访问静态页面
+  freemarker:
+    suffix: .html
+
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+

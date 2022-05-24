@@ -1,0 +1,47 @@
+/*全局样式 优先级高*/
+html,body,#app{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    min-width: 1366px;
+}
+.el-breadcrumb{
+    margin-bottom: 20px;
+    font-size: 12px;
+}
+.el-card{
+    box-shadow: 0 1px 1px rgba(0,0,0,0.15) !important;
+}
+.el-table{
+    margin-top: 20px;
+    font-size: 12px;
+}
+.el-cascader-panel{
+    height: 300px;
+    overflow: auto;
+}
+.el-form-item{
+    width: 100% !important;
+}
+.el-steps{
+    margin: 30px 0px;
+}
+.el-step__title{
+    font-size: 13px;
+}
+.ql-editor{
+    min-height: 500px;
+}
+.el-cascader-menu__wrap{
+    height: 100%;
+}
+.el-cascader-panel{ height: 200px }
+.el-tabs__item{
+    color: white;
+}
+.el-collapse-item__header{
+    background-color:#EAEDF1;
+    color: #5f4eea;
+    font-size: 15px;
+    font-weight:700;
+}

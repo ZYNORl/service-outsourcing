@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.serve.Dao.UserDao">
+    <select id="getUserList" resultType="com.example.serve.bean.user.User">
+        select * from user
+    </select>
+<select id="loginById" resultType="java.lang.Integer" parameterType="com.example.serve.bean.user.User">
+    select id from user where tel = #{tel} and password = #{password}
+</select>
+    <select id="loginByTelCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select id from user where tel = #{tel}
+    </select>
+    <update id="updateUserById" parameterType="com.example.serve.bean.user.User">
+        UPDATE `vue_hrrrr`.`user`
+        SET
+            `birth` = #{birth},`name` = #{name},`photo` = #{photo}, `ident` = #{ident}, `identNumber` = #{identNumber}, `maxEduBack` = #{maxEduBack}, `eduBen` = #{eduBen},`eduSuo` = #{eduSuo},`eduBo` = #{eduBo},`benMajor` = #{benMajor}, `suoMajor` = #{suoMajor}, `boMajor` = #{boMajor},`email`=#{email},`posname` = #{posname}, `status` = #{status},`sex`=#{sex}, `politicStatus` = #{politicStatus}, `nation` = #{nation}, `english` = #{english},`englishUrl`=#{englishUrl}, `introduce`=#{introduce}, `evaluation`=#{evaluation},`hobby`=#{hobby}, `eduBenDateStart`=#{eduBenDateStart}, `eduBenDateEnd`=#{eduBenDateEnd},`eduSuoDateStart`=#{eduSuoDateStart}, `eduSuoDateEnd`=#{eduSuoDateEnd},`eduBoDateStart`=#{eduBoDateStart}, `eduBoDateEnd`=#{eduBoDateEnd}
+
+        WHERE
+
+            (`id` = ${id});
+
+    </update>
+    <select id="getUserById" parameterType="java.lang.Integer" resultType="com.example.serve.bean.user.User">
+        select * from user where id = #{userid}
+    </select>
+    <select id="getACKByTel" resultType="java.lang.String" parameterType="com.example.serve.bean.user.User">
+        select identNumber from user where tel = #{tel} and password = #{password}
+    </select>
+
+    <select id="getUserListByName" parameterType="java.lang.String" resultType="com.example.serve.bean.user.User">
+        select * from user where name = #{name}
+    </select>
+    <select id="getUserListByPosName" parameterType="java.lang.String" resultType="com.example.serve.bean.user.User">
+        select * from user where posname= #{posName}
+    </select>
+    <select id="getSubmitJobListByPosName" parameterType="java.lang.String" resultType="com.example.serve.bean.company.SubmitJob">
+        select * from submitJob where position like concat('%',#{posName},'%')
+    </select>
+    <update id="setUserComIdByFace" parameterType="com.example.serve.bean.user.User">
+        UPDATE `vue_hrrrr`.`user`
+        SET
+            `comid` = #{comid}
+        WHERE
+
+            (`id` = ${userid});
+
+    </update>
+
+</mapper>
+
+
